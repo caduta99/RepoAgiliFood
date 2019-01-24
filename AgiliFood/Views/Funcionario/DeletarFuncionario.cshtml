@@ -1,0 +1,44 @@
+﻿@model AgiliFood.Models.tb_funcionario
+
+@{
+    ViewBag.Title = "DeletarFuncionario";
+}
+
+<h2>Excluir Funcionário</h2>
+
+<h3>Tem certeza que deseja excluir?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Funcionário")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome_funcionario)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Login")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login_funcionario)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Senha")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.senha_funcionario)
+        </dd>
+
+    </dl>
+    <div>
+        @Html.ActionLink("Excluir", "DeletarFuncionarioConfir", "Funcionario", new { @class= "btn btn-danger" })
+    </div>
+
+</div>
+<hr />
+@Html.ActionLink("Lista de Funcionários", "ConsultarFuncionario", "Funcionario")

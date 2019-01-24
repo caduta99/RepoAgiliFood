@@ -1,0 +1,49 @@
+﻿@model AgiliFood.Models.tb_produtos
+
+@{
+    ViewBag.Title = "InserirProdutos";
+}
+
+<h2>Cadastrar Produtos</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id_fornecedor)
+    <div class="form-group">
+        @Html.LabelFor(model => model.nome_produto, htmlAttributes: new { @class = "control-label col-md-2" }, labelText: "Produtos")
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.nome_produto, new { htmlAttributes = new { @class = "form-control" , @maxlength = "50" } })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.status_produtos, htmlAttributes: new { @class = "control-label col-md-2" }, labelText: "Ativo")
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.status_produtos, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Cadastrar" class="btn btn-default" />
+        </div>
+    </div>
+    <center>
+        @Html.ValidationMessage("Error", new { @class = "text-danger" })
+        @Html.ValidationMessage("Success", new { @class = "text-success" })
+    </center>
+</div>
+}
+
+    <div>
+        @Html.ActionLink("Selecionar Fornecedor", "SelecionarFornecedor", "Produtos")
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

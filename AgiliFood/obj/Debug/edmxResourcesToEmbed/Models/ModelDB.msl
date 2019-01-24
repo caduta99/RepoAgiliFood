@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AgiliDBModelStoreContainer" CdmEntityContainer="banco">
+    <EntitySetMapping Name="tb_fornecedor">
+      <EntityTypeMapping TypeName="AgiliDBModel.tb_fornecedor">
+        <MappingFragment StoreEntitySet="tb_fornecedor">
+          <ScalarProperty Name="id_rh" ColumnName="id_rh" />
+          <ScalarProperty Name="status_fornecedor" ColumnName="status_fornecedor" />
+          <ScalarProperty Name="nome_fornecedor" ColumnName="nome_fornecedor" />
+          <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_funcionario">
+      <EntityTypeMapping TypeName="AgiliDBModel.tb_funcionario">
+        <MappingFragment StoreEntitySet="tb_funcionario">
+          <ScalarProperty Name="id_rh" ColumnName="id_rh" />
+          <ScalarProperty Name="senha_funcionario" ColumnName="senha_funcionario" />
+          <ScalarProperty Name="login_funcionario" ColumnName="login_funcionario" />
+          <ScalarProperty Name="nome_funcionario" ColumnName="nome_funcionario" />
+          <ScalarProperty Name="id_funcionario" ColumnName="id_funcionario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_pedido">
+      <EntityTypeMapping TypeName="AgiliDBModel.tb_pedido">
+        <MappingFragment StoreEntitySet="tb_pedido">
+          <ScalarProperty Name="date_pedido" ColumnName="date_pedido" />
+          <ScalarProperty Name="quantidade_produto" ColumnName="quantidade_produto" />
+          <ScalarProperty Name="id_produto" ColumnName="id_produto" />
+          <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
+          <ScalarProperty Name="id_funcionario" ColumnName="id_funcionario" />
+          <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_produtos">
+      <EntityTypeMapping TypeName="AgiliDBModel.tb_produtos">
+        <MappingFragment StoreEntitySet="tb_produtos">
+          <ScalarProperty Name="status_produtos" ColumnName="status_produtos" />
+          <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
+          <ScalarProperty Name="nome_produto" ColumnName="nome_produto" />
+          <ScalarProperty Name="id_produto" ColumnName="id_produto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_rh">
+      <EntityTypeMapping TypeName="AgiliDBModel.tb_rh">
+        <MappingFragment StoreEntitySet="tb_rh">
+          <ScalarProperty Name="senha_rh" ColumnName="senha_rh" />
+          <ScalarProperty Name="login_rh" ColumnName="login_rh" />
+          <ScalarProperty Name="id_rh" ColumnName="id_rh" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

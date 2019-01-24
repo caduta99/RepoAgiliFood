@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AgiliFood.Models.tb_fornecedor>
+
+@{
+    ViewBag.Title = "ConsultarFornecedor";
+}
+
+<h2>Consultar Fornecedores</h2>
+
+<p>
+    @Html.ActionLink("Novo Fornecedor", "InserirFornecedor", "Fornecedor")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Fornecedor")
+        </th>
+        <th>
+            @Html.DisplayName("Ativo")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome_fornecedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status_fornecedor)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "EditarFornecedor", "Fornecedor", new { idFornecedor = item.id_fornecedor }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Excluir", "DeletarFornecedor", "Fornecedor", new { idFornecedor = item.id_fornecedor }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+</table>
+
+<center>
+    @Html.ValidationMessage("Error", new { @class = "text-danger" })
+</center>
+

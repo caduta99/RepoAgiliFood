@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AgiliDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_fornecedor">
+          <Key>
+            <PropertyRef Name="id_fornecedor" />
+          </Key>
+          <Property Name="id_fornecedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_fornecedor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status_fornecedor" Type="bit" Nullable="false" />
+          <Property Name="id_rh" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_funcionario">
+          <Key>
+            <PropertyRef Name="id_funcionario" />
+          </Key>
+          <Property Name="id_funcionario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_funcionario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="login_funcionario" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="senha_funcionario" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_rh" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_pedido">
+          <Key>
+            <PropertyRef Name="id_pedido" />
+          </Key>
+          <Property Name="id_pedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_funcionario" Type="int" Nullable="false" />
+          <Property Name="id_fornecedor" Type="int" Nullable="false" />
+          <Property Name="id_produto" Type="int" Nullable="false" />
+          <Property Name="quantidade_produto" Type="int" Nullable="false" />
+          <Property Name="date_pedido" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_produtos">
+          <Key>
+            <PropertyRef Name="id_produto" />
+          </Key>
+          <Property Name="id_produto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_produto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_fornecedor" Type="int" Nullable="false" />
+          <Property Name="status_produtos" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_rh">
+          <Key>
+            <PropertyRef Name="id_rh" />
+          </Key>
+          <Property Name="id_rh" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login_rh" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="senha_rh" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tb_fornecedor_tb_rh">
+          <End Role="tb_rh" Type="Self.tb_rh" Multiplicity="1" />
+          <End Role="tb_fornecedor" Type="Self.tb_fornecedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_rh">
+              <PropertyRef Name="id_rh" />
+            </Principal>
+            <Dependent Role="tb_fornecedor">
+              <PropertyRef Name="id_rh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_funcionario_tb_rh">
+          <End Role="tb_rh" Type="Self.tb_rh" Multiplicity="1" />
+          <End Role="tb_funcionario" Type="Self.tb_funcionario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_rh">
+              <PropertyRef Name="id_rh" />
+            </Principal>
+            <Dependent Role="tb_funcionario">
+              <PropertyRef Name="id_rh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_pedido_tb_fornecedor">
+          <End Role="tb_fornecedor" Type="Self.tb_fornecedor" Multiplicity="1" />
+          <End Role="tb_pedido" Type="Self.tb_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fornecedor">
+              <PropertyRef Name="id_fornecedor" />
+            </Principal>
+            <Dependent Role="tb_pedido">
+              <PropertyRef Name="id_fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_pedido_tb_funcionario">
+          <End Role="tb_funcionario" Type="Self.tb_funcionario" Multiplicity="1" />
+          <End Role="tb_pedido" Type="Self.tb_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_funcionario">
+              <PropertyRef Name="id_funcionario" />
+            </Principal>
+            <Dependent Role="tb_pedido">
+              <PropertyRef Name="id_funcionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_pedido_tb_produtos">
+          <End Role="tb_produtos" Type="Self.tb_produtos" Multiplicity="1" />
+          <End Role="tb_pedido" Type="Self.tb_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_produtos">
+              <PropertyRef Name="id_produto" />
+            </Principal>
+            <Dependent Role="tb_pedido">
+              <PropertyRef Name="id_produto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_produtos_tb_fornecedor">
+          <End Role="tb_fornecedor" Type="Self.tb_fornecedor" Multiplicity="1" />
+          <End Role="tb_produtos" Type="Self.tb_produtos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fornecedor">
+              <PropertyRef Name="id_fornecedor" />
+            </Principal>
+            <Dependent Role="tb_produtos">
+              <PropertyRef Name="id_fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AgiliDBModelStoreContainer">
+          <EntitySet Name="tb_fornecedor" EntityType="Self.tb_fornecedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_funcionario" EntityType="Self.tb_funcionario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_pedido" EntityType="Self.tb_pedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_produtos" EntityType="Self.tb_produtos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_rh" EntityType="Self.tb_rh" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tb_fornecedor_tb_rh" Association="Self.FK_tb_fornecedor_tb_rh">
+            <End Role="tb_rh" EntitySet="tb_rh" />
+            <End Role="tb_fornecedor" EntitySet="tb_fornecedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_funcionario_tb_rh" Association="Self.FK_tb_funcionario_tb_rh">
+            <End Role="tb_rh" EntitySet="tb_rh" />
+            <End Role="tb_funcionario" EntitySet="tb_funcionario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_pedido_tb_fornecedor" Association="Self.FK_tb_pedido_tb_fornecedor">
+            <End Role="tb_fornecedor" EntitySet="tb_fornecedor" />
+            <End Role="tb_pedido" EntitySet="tb_pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_pedido_tb_funcionario" Association="Self.FK_tb_pedido_tb_funcionario">
+            <End Role="tb_funcionario" EntitySet="tb_funcionario" />
+            <End Role="tb_pedido" EntitySet="tb_pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_pedido_tb_produtos" Association="Self.FK_tb_pedido_tb_produtos">
+            <End Role="tb_produtos" EntitySet="tb_produtos" />
+            <End Role="tb_pedido" EntitySet="tb_pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_produtos_tb_fornecedor" Association="Self.FK_tb_produtos_tb_fornecedor">
+            <End Role="tb_fornecedor" EntitySet="tb_fornecedor" />
+            <End Role="tb_produtos" EntitySet="tb_produtos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AgiliDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="banco" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_fornecedor" EntityType="AgiliDBModel.tb_fornecedor" />
+          <EntitySet Name="tb_funcionario" EntityType="AgiliDBModel.tb_funcionario" />
+          <EntitySet Name="tb_pedido" EntityType="AgiliDBModel.tb_pedido" />
+          <EntitySet Name="tb_produtos" EntityType="AgiliDBModel.tb_produtos" />
+          <EntitySet Name="tb_rh" EntityType="AgiliDBModel.tb_rh" />
+          <AssociationSet Name="FK_tb_fornecedor_tb_rh" Association="AgiliDBModel.FK_tb_fornecedor_tb_rh">
+            <End Role="tb_rh" EntitySet="tb_rh" />
+            <End Role="tb_fornecedor" EntitySet="tb_fornecedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_pedido_tb_fornecedor" Association="AgiliDBModel.FK_tb_pedido_tb_fornecedor">
+            <End Role="tb_fornecedor" EntitySet="tb_fornecedor" />
+            <End Role="tb_pedido" EntitySet="tb_pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_produtos_tb_fornecedor" Association="AgiliDBModel.FK_tb_produtos_tb_fornecedor">
+            <End Role="tb_fornecedor" EntitySet="tb_fornecedor" />
+            <End Role="tb_produtos" EntitySet="tb_produtos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_funcionario_tb_rh" Association="AgiliDBModel.FK_tb_funcionario_tb_rh">
+            <End Role="tb_rh" EntitySet="tb_rh" />
+            <End Role="tb_funcionario" EntitySet="tb_funcionario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_pedido_tb_funcionario" Association="AgiliDBModel.FK_tb_pedido_tb_funcionario">
+            <End Role="tb_funcionario" EntitySet="tb_funcionario" />
+            <End Role="tb_pedido" EntitySet="tb_pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_pedido_tb_produtos" Association="AgiliDBModel.FK_tb_pedido_tb_produtos">
+            <End Role="tb_produtos" EntitySet="tb_produtos" />
+            <End Role="tb_pedido" EntitySet="tb_pedido" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tb_fornecedor">
+          <Key>
+            <PropertyRef Name="id_fornecedor" />
+          </Key>
+          <Property Name="id_fornecedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_fornecedor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status_fornecedor" Type="Boolean" Nullable="false" />
+          <Property Name="id_rh" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_rh" Relationship="AgiliDBModel.FK_tb_fornecedor_tb_rh" FromRole="tb_fornecedor" ToRole="tb_rh" />
+          <NavigationProperty Name="tb_pedido" Relationship="AgiliDBModel.FK_tb_pedido_tb_fornecedor" FromRole="tb_fornecedor" ToRole="tb_pedido" />
+          <NavigationProperty Name="tb_produtos" Relationship="AgiliDBModel.FK_tb_produtos_tb_fornecedor" FromRole="tb_fornecedor" ToRole="tb_produtos" />
+        </EntityType>
+        <EntityType Name="tb_funcionario">
+          <Key>
+            <PropertyRef Name="id_funcionario" />
+          </Key>
+          <Property Name="id_funcionario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_funcionario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="login_funcionario" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="senha_funcionario" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="id_rh" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_rh" Relationship="AgiliDBModel.FK_tb_funcionario_tb_rh" FromRole="tb_funcionario" ToRole="tb_rh" />
+          <NavigationProperty Name="tb_pedido" Relationship="AgiliDBModel.FK_tb_pedido_tb_funcionario" FromRole="tb_funcionario" ToRole="tb_pedido" />
+        </EntityType>
+        <EntityType Name="tb_pedido">
+          <Key>
+            <PropertyRef Name="id_pedido" />
+          </Key>
+          <Property Name="id_pedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_funcionario" Type="Int32" Nullable="false" />
+          <Property Name="id_fornecedor" Type="Int32" Nullable="false" />
+          <Property Name="id_produto" Type="Int32" Nullable="false" />
+          <Property Name="quantidade_produto" Type="Int32" Nullable="false" />
+          <Property Name="date_pedido" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tb_fornecedor" Relationship="AgiliDBModel.FK_tb_pedido_tb_fornecedor" FromRole="tb_pedido" ToRole="tb_fornecedor" />
+          <NavigationProperty Name="tb_funcionario" Relationship="AgiliDBModel.FK_tb_pedido_tb_funcionario" FromRole="tb_pedido" ToRole="tb_funcionario" />
+          <NavigationProperty Name="tb_produtos" Relationship="AgiliDBModel.FK_tb_pedido_tb_produtos" FromRole="tb_pedido" ToRole="tb_produtos" />
+        </EntityType>
+        <EntityType Name="tb_produtos">
+          <Key>
+            <PropertyRef Name="id_produto" />
+          </Key>
+          <Property Name="id_produto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_produto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_fornecedor" Type="Int32" Nullable="false" />
+          <Property Name="status_produtos" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tb_fornecedor" Relationship="AgiliDBModel.FK_tb_produtos_tb_fornecedor" FromRole="tb_produtos" ToRole="tb_fornecedor" />
+          <NavigationProperty Name="tb_pedido" Relationship="AgiliDBModel.FK_tb_pedido_tb_produtos" FromRole="tb_produtos" ToRole="tb_pedido" />
+        </EntityType>
+        <EntityType Name="tb_rh">
+          <Key>
+            <PropertyRef Name="id_rh" />
+          </Key>
+          <Property Name="id_rh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login_rh" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="senha_rh" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_fornecedor" Relationship="AgiliDBModel.FK_tb_fornecedor_tb_rh" FromRole="tb_rh" ToRole="tb_fornecedor" />
+          <NavigationProperty Name="tb_funcionario" Relationship="AgiliDBModel.FK_tb_funcionario_tb_rh" FromRole="tb_rh" ToRole="tb_funcionario" />
+        </EntityType>
+        <Association Name="FK_tb_fornecedor_tb_rh">
+          <End Type="AgiliDBModel.tb_rh" Role="tb_rh" Multiplicity="1" />
+          <End Type="AgiliDBModel.tb_fornecedor" Role="tb_fornecedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_rh">
+              <PropertyRef Name="id_rh" />
+            </Principal>
+            <Dependent Role="tb_fornecedor">
+              <PropertyRef Name="id_rh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_pedido_tb_fornecedor">
+          <End Type="AgiliDBModel.tb_fornecedor" Role="tb_fornecedor" Multiplicity="1" />
+          <End Type="AgiliDBModel.tb_pedido" Role="tb_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fornecedor">
+              <PropertyRef Name="id_fornecedor" />
+            </Principal>
+            <Dependent Role="tb_pedido">
+              <PropertyRef Name="id_fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_produtos_tb_fornecedor">
+          <End Type="AgiliDBModel.tb_fornecedor" Role="tb_fornecedor" Multiplicity="1" />
+          <End Type="AgiliDBModel.tb_produtos" Role="tb_produtos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fornecedor">
+              <PropertyRef Name="id_fornecedor" />
+            </Principal>
+            <Dependent Role="tb_produtos">
+              <PropertyRef Name="id_fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_funcionario_tb_rh">
+          <End Type="AgiliDBModel.tb_rh" Role="tb_rh" Multiplicity="1" />
+          <End Type="AgiliDBModel.tb_funcionario" Role="tb_funcionario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_rh">
+              <PropertyRef Name="id_rh" />
+            </Principal>
+            <Dependent Role="tb_funcionario">
+              <PropertyRef Name="id_rh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_pedido_tb_funcionario">
+          <End Type="AgiliDBModel.tb_funcionario" Role="tb_funcionario" Multiplicity="1" />
+          <End Type="AgiliDBModel.tb_pedido" Role="tb_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_funcionario">
+              <PropertyRef Name="id_funcionario" />
+            </Principal>
+            <Dependent Role="tb_pedido">
+              <PropertyRef Name="id_funcionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_pedido_tb_produtos">
+          <End Type="AgiliDBModel.tb_produtos" Role="tb_produtos" Multiplicity="1" />
+          <End Type="AgiliDBModel.tb_pedido" Role="tb_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_produtos">
+              <PropertyRef Name="id_produto" />
+            </Principal>
+            <Dependent Role="tb_pedido">
+              <PropertyRef Name="id_produto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AgiliDBModelStoreContainer" CdmEntityContainer="banco">
+          <EntitySetMapping Name="tb_fornecedor">
+            <EntityTypeMapping TypeName="AgiliDBModel.tb_fornecedor">
+              <MappingFragment StoreEntitySet="tb_fornecedor">
+                <ScalarProperty Name="id_rh" ColumnName="id_rh" />
+                <ScalarProperty Name="status_fornecedor" ColumnName="status_fornecedor" />
+                <ScalarProperty Name="nome_fornecedor" ColumnName="nome_fornecedor" />
+                <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_funcionario">
+            <EntityTypeMapping TypeName="AgiliDBModel.tb_funcionario">
+              <MappingFragment StoreEntitySet="tb_funcionario">
+                <ScalarProperty Name="id_rh" ColumnName="id_rh" />
+                <ScalarProperty Name="senha_funcionario" ColumnName="senha_funcionario" />
+                <ScalarProperty Name="login_funcionario" ColumnName="login_funcionario" />
+                <ScalarProperty Name="nome_funcionario" ColumnName="nome_funcionario" />
+                <ScalarProperty Name="id_funcionario" ColumnName="id_funcionario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_pedido">
+            <EntityTypeMapping TypeName="AgiliDBModel.tb_pedido">
+              <MappingFragment StoreEntitySet="tb_pedido">
+                <ScalarProperty Name="date_pedido" ColumnName="date_pedido" />
+                <ScalarProperty Name="quantidade_produto" ColumnName="quantidade_produto" />
+                <ScalarProperty Name="id_produto" ColumnName="id_produto" />
+                <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
+                <ScalarProperty Name="id_funcionario" ColumnName="id_funcionario" />
+                <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_produtos">
+            <EntityTypeMapping TypeName="AgiliDBModel.tb_produtos">
+              <MappingFragment StoreEntitySet="tb_produtos">
+                <ScalarProperty Name="status_produtos" ColumnName="status_produtos" />
+                <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
+                <ScalarProperty Name="nome_produto" ColumnName="nome_produto" />
+                <ScalarProperty Name="id_produto" ColumnName="id_produto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_rh">
+            <EntityTypeMapping TypeName="AgiliDBModel.tb_rh">
+              <MappingFragment StoreEntitySet="tb_rh">
+                <ScalarProperty Name="senha_rh" ColumnName="senha_rh" />
+                <ScalarProperty Name="login_rh" ColumnName="login_rh" />
+                <ScalarProperty Name="id_rh" ColumnName="id_rh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

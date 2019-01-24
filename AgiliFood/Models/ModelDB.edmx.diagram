@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f84965a7fbd4445ebb2dc514cc4c15e4" Name="Diagram1">
+        <EntityTypeShape EntityType="AgiliDBModel.tb_fornecedor" Width="1.5" PointX="1.5" PointY="2.5" />
+        <EntityTypeShape EntityType="AgiliDBModel.tb_funcionario" Width="1.5" PointX="8.125" PointY="1.875" />
+        <EntityTypeShape EntityType="AgiliDBModel.tb_pedido" Width="1.5" PointX="4.875" PointY="6.75" />
+        <EntityTypeShape EntityType="AgiliDBModel.tb_produtos" Width="1.5" PointX="4.75" PointY="4.25" />
+        <EntityTypeShape EntityType="AgiliDBModel.tb_rh" Width="1.5" PointX="4.625" PointY="1.625" />
+        <AssociationConnector Association="AgiliDBModel.FK_tb_fornecedor_tb_rh" />
+        <AssociationConnector Association="AgiliDBModel.FK_tb_pedido_tb_fornecedor" />
+        <AssociationConnector Association="AgiliDBModel.FK_tb_produtos_tb_fornecedor" />
+        <AssociationConnector Association="AgiliDBModel.FK_tb_funcionario_tb_rh" />
+        <AssociationConnector Association="AgiliDBModel.FK_tb_pedido_tb_funcionario" />
+        <AssociationConnector Association="AgiliDBModel.FK_tb_pedido_tb_produtos" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

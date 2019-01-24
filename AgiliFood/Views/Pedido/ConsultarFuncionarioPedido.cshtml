@@ -1,0 +1,31 @@
+﻿@model IEnumerable<AgiliFood.Models.tb_funcionario>
+
+@{
+    ViewBag.Title = "ConsultarFuncionarioPedido";
+}
+
+<h2>Consultar Pedidos por Funcionário</h2>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Funcionário")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nome_funcionario)
+        </td>
+        <td>
+            @Html.ActionLink("Selecionar", "FiltrarDataPedido", "Pedido",  new { idFuncionario=item.id_funcionario }, new { @class="btn btn-success" })
+        </td>
+    </tr>
+}
+</table>
+
+<center>
+    @Html.ValidationMessage("Error", new { @class = "text-danger" })
+</center>

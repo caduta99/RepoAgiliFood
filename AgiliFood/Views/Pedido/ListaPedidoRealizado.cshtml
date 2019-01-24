@@ -1,0 +1,56 @@
+﻿@model IEnumerable<AgiliFood.Models.tb_pedido>
+
+@{
+    ViewBag.Title = "ListaPedidoRealizado";
+}
+
+<h2>Pedidos Realizados</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Funcionário")
+        </th>
+        <th>
+            @Html.DisplayName("Fornecedor")
+        </th>
+        <th>
+            @Html.DisplayName("Produto")
+        </th>
+        <th>
+            @Html.DisplayName("Quantidade")
+        </th>
+        <th>
+            @Html.DisplayName("Data")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tb_funcionario.nome_funcionario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tb_fornecedor.nome_fornecedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tb_produtos.nome_produto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantidade_produto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_pedido)
+            </td>
+        </tr>
+    }
+</table>
+<center>
+    @Html.ValidationMessage("Error", new { @class = "text-danger" })
+</center>
+<p>
+    @Html.ActionLink("Voltar", "ConsultarFuncionarioPedido", "Pedido")
+</p>

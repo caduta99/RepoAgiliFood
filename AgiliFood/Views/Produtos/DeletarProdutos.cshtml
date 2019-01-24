@@ -1,0 +1,34 @@
+﻿@model AgiliFood.Models.tb_produtos
+
+@{
+    ViewBag.Title = "DeletarProdutos";
+}
+
+<h2>Excluir Produtos</h2>
+
+<h3>Tem certeza que deseja excluir isso?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Produto")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome_produto)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Fornecedor")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_fornecedor.nome_fornecedor)
+        </dd>
+
+    </dl>
+    <div>
+        @Html.ActionLink("Excluir", "DeletarProdutosConfir", "Produtos", new { @class= "btn btn-danger"})
+    </div>
+    <hr />
+</div>
+@Html.ActionLink("Selecionar Fornecedor", "SelecionarFornecedor", "Produtos")
